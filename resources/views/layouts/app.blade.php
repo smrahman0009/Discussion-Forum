@@ -86,9 +86,9 @@
                             <div class="card-body">
                                 <ul class="list-group">
                                     @foreach($channels as $channel)
-                                        <li class="list-group-item">
+                                        <a href="{{route('channel',$channel->slug)}}" class="list-group-item" style="text-decoration:none;" >
                                             {{$channel->title}}
-                                        </li>
+                                        </a>
                                     @endforeach
                                 </ul>
                             </div>

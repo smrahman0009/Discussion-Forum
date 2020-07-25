@@ -56,4 +56,6 @@ Route::group(['middleware' => 'auth'],function(){
 
     Route::get('/reply/like/{id}','RepliesController@like')->name('reply.like');
     Route::get('/reply/unlike/{id}','RepliesController@unlike')->name('reply.unlike');
+
+    Route::get('/channel/{slug}','ForumsController@channel')->name('channel');
 });
