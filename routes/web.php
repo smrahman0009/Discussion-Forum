@@ -52,4 +52,8 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('/discussion/store','DiscussionsController@store')->name('discussion.store');
     Route::post('/discussion/update','DiscussionsController@update')->name('discussion.update');
     Route::post('/discussion/reply/{id}','DiscussionsController@reply')->name('discussion.reply');
+
+
+    Route::get('/reply/like/{id}','RepliesController@like')->name('reply.like');
+    Route::get('/reply/unlike/{id}','RepliesController@unlike')->name('reply.unlike');
 });
