@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Discussion;
 use App\Reply;
+use App\User;
+use App\Notifications\NewReplyAdded;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 
 class DiscussionsController extends Controller
@@ -51,6 +54,14 @@ class DiscussionsController extends Controller
             'discussion_id' => $discussion->id,
             'content' => $request->reply,
         ]);
+
+        $watchers = array();
+        foreach($discussion->watchers as $watcher){
+            array_push($watchers,User::find($watcher->user_id));
+        }
+       
+        Notification::send($watchers, new NewReplyAdded($discussion));
+
         session()->flash('success','Reply submitted successfully');
 
         return redirect()->route('discussion',$discussion->slug);
