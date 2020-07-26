@@ -76,24 +76,40 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="{{route('discussion.create')}}" class="form-control btn btn-primary">
-                            Create New Discussion
-                        </a>
-                        <div class="card">
-                            <div class="card-header">
-                              Channels
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    @foreach($channels as $channel)
-                                        <a href="{{route('channel',$channel->slug)}}" class="list-group-item" style="text-decoration:none;" >
-                                            {{$channel->title}}
-                                        </a>
-                                    @endforeach
-                                </ul>
-                            </div>
+                    @if(Auth::check() && Auth::user()->admin)
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <a href="{{route('discussion.create')}}" class="form-control btn btn-primary">
+                                    Create New Discussion
+                                </a>
+                            </ul>
                         </div>
                     </div>
+                    <br>
+                    @endif
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <a href="{{route('forum')}}" class="list-group-item" style="text-decoration:none;" >
+                                    Home
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                        <br>
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                @foreach($channels as $channel)
+                                    <a href="{{route('channel',$channel->slug)}}" class="list-group-item" style="text-decoration:none;" >
+                                        {{$channel->title}}
+                                    </a>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                     <div class="col-md-8">
                         @yield('content')
                     </div>

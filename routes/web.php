@@ -44,10 +44,13 @@ Route::get('/{provider}/auth', 'Auth\LoginController@auth')->name('social.auth')
 
 Route::get('/{provider}/redirect', 'Auth\LoginController@auth_callback')->name('social.callback');
 
+Route::get('/discussion/create/{slug}','DiscussionsController@show')->name('discussion');
+
+Route::get('/channel/{slug}','ForumsController@channel')->name('channel');
+
 Route::group(['middleware' => 'auth'],function(){
     Route::resource('channels','ChannelsController');
 
-    Route::get('/discussion/{slug}','DiscussionsController@show')->name('discussion');
     Route::get('/discussion/create','DiscussionsController@create')->name('discussion.create');
     Route::post('/discussion/store','DiscussionsController@store')->name('discussion.store');
     Route::post('/discussion/update','DiscussionsController@update')->name('discussion.update');
@@ -57,5 +60,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/reply/like/{id}','RepliesController@like')->name('reply.like');
     Route::get('/reply/unlike/{id}','RepliesController@unlike')->name('reply.unlike');
 
-    Route::get('/channel/{slug}','ForumsController@channel')->name('channel');
+    Route::get('/watch/add/{id}','WatchersController@watch')->name('watch.watch');
+    Route::get('/watch/remove/{id}','WatchersController@unWatch')->name('watch.unwatch');
+
 });

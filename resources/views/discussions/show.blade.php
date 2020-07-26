@@ -8,6 +8,11 @@
         <img src="{{asset($discussion->user->avatar)}}" alt="" width="70px" height="70px">&nbsp;&nbsp;&nbsp;
         <br>
         <b>{{$discussion->created_at->diffForHumans()}}</b>
+        @if(!$discussion->is_in_watched_list())
+        <a href="{{route('watch.watch',$discussion->id)}}" class="btn btn-info btn-sm float-sm-right">watch</a>
+        @else
+        <a href="{{route('watch.unwatch',$discussion->id)}}" class="btn btn-info btn-sm float-sm-right">unwatch</a>
+        @endif
     </div>
 
     <div class="card-body">
@@ -64,6 +69,7 @@
         <h4 class="text-center">Leave a reply</h4>
     </div>
     <div class="card-body">
+        @if(Auth::check())
         <form action="{{route('discussion.reply',$discussion->id)}}" method="post">
             @csrf
             <div class="form-group">
@@ -76,6 +82,13 @@
                 </button>
             </div>
         </form>
+        @else
+            <div class="text-center">
+                <h2>
+                    Sign in first to leave a reply
+                </h2>
+            </div>
+        @endif
     </div>
 </div>   
 @endsection
