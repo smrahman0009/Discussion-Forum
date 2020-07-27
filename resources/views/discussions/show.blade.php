@@ -48,7 +48,7 @@
         </p>
     </div>
     <div class="card-footer">
-        @if($reply->is_liked_auth_user())
+        <!-- @if($reply->is_liked_auth_user())
             <a href="{{route('reply.unlike',$reply->id)}}" class="btn btn-warning btn-sm">
                 <span class="badge">{{$reply->likes->count()}}</span>
                 Unlike
@@ -59,6 +59,19 @@
                 Like
              </a>
         @endif
+        <br>
+        <hr> -->
+            <a href="{{route('reply.ratting',['id'=>$reply->id,'vote'=>'down_vote'])}}"
+                class="btn btn-warning btn-sm float-sm-right">
+                Down Vote
+                <span class="badge">{{$reply->vote_count("down_vote")}}</span>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{{route('reply.ratting',['id'=>$reply->id,'vote'=>'up_vote'])}}"
+                class="btn btn-success btn-sm float-sm-left">
+                Up Vote
+                <span class="badge">{{$reply->vote_count("up_vote")}}</span>
+            </a>
     </div>
 </div>
 <br>

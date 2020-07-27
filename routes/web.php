@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth'],function(){
     Route::get('/reply/like/{id}','RepliesController@like')->name('reply.like');
     Route::get('/reply/unlike/{id}','RepliesController@unlike')->name('reply.unlike');
 
+    Route::get('/reply/ratting/{id}/{vote}','RepliesController@ratting')->name('reply.ratting');
+
     Route::get('/watch/add/{id}','WatchersController@watch')->name('watch.watch');
     Route::get('/watch/remove/{id}','WatchersController@unWatch')->name('watch.unwatch');
 
