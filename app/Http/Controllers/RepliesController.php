@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BestReply;
 use App\Like;
 use App\Ratting;
 use App\Reply;
@@ -44,6 +45,19 @@ class RepliesController extends Controller
             ]
         );
 
+        return redirect()->back();
+    }
+
+    public function bestReply($reply_id,$user_id,$discussion_id){
+      
+        // dd($user_id);
+        BestReply::create([
+            'reply_id' => $reply_id,
+            'discussion_id'=>$discussion_id,
+            'user_id' => $user_id,
+        ]);
+
+        
         return redirect()->back();
     }
 }

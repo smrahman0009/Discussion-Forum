@@ -44,11 +44,16 @@ class Reply extends Model
         foreach($this->rattings as $ratting){
             if($key_field == "up_vote" && $ratting->up_vote){
                 $counter++;
-            }elseif($key_field == "down_vote" && $ratting->up_vote){
+            }elseif($key_field == "down_vote" && $ratting->down_vote){
                 $counter++;
             }
         }
         
         return $counter;
     }
+
+    public function bestReply(){
+        return $this->hasOne(BestReply::class);
+    }
+
 }

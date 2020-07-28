@@ -37,5 +37,9 @@ class Discussion extends Model
             return true;
         }else return false;
     }
+
+    public function bestReply(){
+        return $this->hasOne(BestReply::class);
+    }
     
 }

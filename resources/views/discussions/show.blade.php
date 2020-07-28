@@ -24,6 +24,25 @@
         {{$discussion->content}}
         </p>
     </div>
+    @if($best_reply)
+    <div class="card text-center">
+        <div class="card-header">
+            Best Answer
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+               <h4>
+               {{$best_reply->reply->content}}
+               </h4>
+            </p>
+            <img src="{{$best_reply->discussion->user->avatar}}" width="40px" height="40px" ><br>
+            <b>{{$best_reply->discussion->user->name}}</b>
+        </div>
+        <div class="card-footer text-muted">
+        {{$best_reply->created_at->diffForHumans()}}
+        </div>
+    </div>
+    @endif
     <div class="card-footer">
         <p>
             {{$discussion->replies->count() ? $discussion->replies->count() : ""}}
@@ -40,6 +59,13 @@
         <img src="{{asset($reply->user->avatar)}}" alt="" width="70px" height="70px">&nbsp;&nbsp;&nbsp;
         <br>
         <b>{{$reply->created_at->diffForHumans()}}</b>
+        @if(!$best_reply)
+        <a href="{{route('reply.best.retting',
+        ['reply_id'=>$reply->id,'user_id'=>$reply->user_id,'discussion_id'=>$discussion->id])}}"
+            class="btn btn-success btn-sm float-sm-right">
+            Mark as best answer
+        </a>
+        @endif
     </div>
 
     <div class="card-body">
@@ -61,17 +87,17 @@
         @endif
         <br>
         <hr> -->
-            <a href="{{route('reply.ratting',['id'=>$reply->id,'vote'=>'down_vote'])}}"
-                class="btn btn-warning btn-sm float-sm-right">
-                Down Vote
-                <span class="badge">{{$reply->vote_count("down_vote")}}</span>
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="{{route('reply.ratting',['id'=>$reply->id,'vote'=>'up_vote'])}}"
-                class="btn btn-success btn-sm float-sm-left">
-                Up Vote
-                <span class="badge">{{$reply->vote_count("up_vote")}}</span>
-            </a>
+        <a href="{{route('reply.ratting',['id'=>$reply->id,'vote'=>'down_vote'])}}"
+            class="btn btn-warning btn-sm float-sm-right">
+            Down Vote
+            <span class="badge">{{$reply->vote_count("down_vote")}}</span>
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a href="{{route('reply.ratting',['id'=>$reply->id,'vote'=>'up_vote'])}}"
+            class="btn btn-success btn-sm float-sm-left">
+            Up Vote
+            <span class="badge">{{$reply->vote_count("up_vote")}}</span>
+        </a>
     </div>
 </div>
 <br>

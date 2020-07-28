@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth'],function(){
 
     Route::get('/reply/ratting/{id}/{vote}','RepliesController@ratting')->name('reply.ratting');
 
+    Route::get('/reply/best/retting/{reply_id?}/{user_id?}/{discussion_id?}','RepliesController@bestReply')->name('reply.best.retting');
+
     Route::get('/watch/add/{id}','WatchersController@watch')->name('watch.watch');
     Route::get('/watch/remove/{id}','WatchersController@unWatch')->name('watch.unwatch');
 
