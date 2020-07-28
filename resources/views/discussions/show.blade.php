@@ -7,7 +7,7 @@
         <br>
         <img src="{{asset($discussion->user->avatar)}}" alt="" width="70px" height="70px">&nbsp;&nbsp;&nbsp;
         <br>
-        <b>{{$discussion->created_at->diffForHumans()}}</b>
+        <b>{{$discussion->user->points}}</b>
         @if(!$discussion->is_in_watched_list())
         <a href="{{route('watch.watch',$discussion->id)}}" class="btn btn-info btn-sm float-sm-right">watch</a>
         @else
@@ -36,10 +36,10 @@
                </h4>
             </p>
             <img src="{{$best_reply->discussion->user->avatar}}" width="40px" height="40px" ><br>
-            <b>{{$best_reply->discussion->user->name}}</b>
+            <b>{{$best_reply->user->name}}</b>
         </div>
         <div class="card-footer text-muted">
-        {{$best_reply->created_at->diffForHumans()}}
+               {{$best_reply->user->points}}
         </div>
     </div>
     @endif
@@ -58,8 +58,8 @@
         <br>
         <img src="{{asset($reply->user->avatar)}}" alt="" width="70px" height="70px">&nbsp;&nbsp;&nbsp;
         <br>
-        <b>{{$reply->created_at->diffForHumans()}}</b>
-        @if(!$best_reply)
+        <b> {{$reply->user->points}}</b>
+        @if(!$best_reply && Auth::id() == $discussion->user->id)
         <a href="{{route('reply.best.retting',
         ['reply_id'=>$reply->id,'user_id'=>$reply->user_id,'discussion_id'=>$discussion->id])}}"
             class="btn btn-success btn-sm float-sm-right">

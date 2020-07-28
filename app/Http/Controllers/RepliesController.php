@@ -51,12 +51,15 @@ class RepliesController extends Controller
     public function bestReply($reply_id,$user_id,$discussion_id){
       
         // dd($user_id);
-        BestReply::create([
+        $best_reply = BestReply::create([
             'reply_id' => $reply_id,
             'discussion_id'=>$discussion_id,
             'user_id' => $user_id,
         ]);
 
+        // dd( $best_reply->user->points);
+        $best_reply->user->points += 100;
+        $best_reply->user->save();
         
         return redirect()->back();
     }

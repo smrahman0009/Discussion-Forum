@@ -49,12 +49,15 @@ class DiscussionsController extends Controller
     public function reply(Request $request,$id){
         $discussion = Discussion::find($id)->first();
         $this->validate($request,['reply'=>'required']);
-        Reply::create([
+        $reply = Reply::create([
             'user_id' => Auth::id(),
             'discussion_id' => $discussion->id,
             'content' => $request->reply,
         ]);
 
+        $reply->user->points += 20;
+        $reply->user->save();
+        
         $watchers = array();
         foreach($discussion->watchers as $watcher){
             array_push($watchers,User::find($watcher->user_id));
