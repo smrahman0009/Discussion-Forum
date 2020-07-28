@@ -59,7 +59,7 @@
         <img src="{{asset($reply->user->avatar)}}" alt="" width="70px" height="70px">&nbsp;&nbsp;&nbsp;
         <br>
         <b> {{$reply->user->points}}</b>
-        @if(!$best_reply && Auth::id() == $discussion->user->id)
+        @if(!$best_reply && Auth::id() == $discussion->user->id && $discussion->user->id != $reply->user->id)
         <a href="{{route('reply.best.retting',
         ['reply_id'=>$reply->id,'user_id'=>$reply->user_id,'discussion_id'=>$discussion->id])}}"
             class="btn btn-success btn-sm float-sm-right">

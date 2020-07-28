@@ -29,12 +29,13 @@
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title" class="form-control" value="{{isset($discussion) ? $discussion->title : ''}}">
+                <input type="text" id="title" name="title" class="form-control" value="{{isset($discussion) ? $discussion->title : ''}}{{old('title')}}">
             </div>
             <div class="form-group">
                 <label for="content">Ask a question</label>
                 <textarea name="content" id="content" cols="30" rows="10" class="form-control">
                     {{isset($discussion) ? $channel->description:''}}
+                    {{old('content')}}
                 </textarea>
             </div>
             <div class="form-group">
