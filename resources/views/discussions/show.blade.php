@@ -13,6 +13,9 @@
         @else
         <a href="{{route('watch.unwatch',$discussion->id)}}" class="btn btn-info btn-sm float-sm-right">unwatch</a>
         @endif
+        @if(!$discussion->hasBestReply() && Auth::id() == $discussion->user_id)
+            <a href="{{route('discussion.edit',$discussion->slug)}}" class="btn btn-info btn-sm float-sm-right">edit</a>
+        @endif
     </div>
 
     <div class="card-body">
@@ -102,6 +105,7 @@
 </div>
 <br>
 @endforeach
+@if(!$discussion->bestReply)
 <br>
 <div class="card card-default">
     <div class="card-header">
@@ -129,5 +133,12 @@
             </div>
         @endif
     </div>
-</div>   
+</div>
+@else
+<div class="card card-default">
+    <div class="card-header">
+        <h4 class="text-center">This discussion is closed</h4>
+    </div>
+</div>
+@endif
 @endsection

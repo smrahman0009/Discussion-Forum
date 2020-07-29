@@ -9,6 +9,11 @@
                 <img src="{{asset($discussion->user->avatar)}}" alt="" width="70px" height="70px">&nbsp;&nbsp;&nbsp;
                 <br>
                 <b>{{$discussion->created_at->diffForHumans()}}</b>
+                @if($discussion->bestReply)
+                    <a class="btn btn-success btn-sm float-sm-right" disabled>
+                        closed
+                    </a>
+                @endif
             </div>
 
             <div class="card-body">

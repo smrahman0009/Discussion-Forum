@@ -95,6 +95,16 @@
                                     Home
                                 </a>
                             </ul>
+                            <ul class="list-group">
+                                <a href="/forum?filter=me" class="list-group-item" style="text-decoration:none;" >
+                                    MY Discussions
+                                </a>
+                            </ul>
+                            <ul class="list-group">
+                                <a href="/forum?filter=closed" class="list-group-item" style="text-decoration:none;" >
+                                    Closed Discussions
+                                </a>
+                            </ul>
                         </div>
                     </div>
                         <br>

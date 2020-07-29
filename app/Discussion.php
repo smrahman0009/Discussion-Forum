@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class Discussion extends Model
 {
@@ -40,6 +41,13 @@ class Discussion extends Model
 
     public function bestReply(){
         return $this->hasOne(BestReply::class);
+    }
+
+    public function hasBestReply(){
+        if(!$this->bestReply()->first()){
+            return false;
+        }
+        return true;
     }
     
 }
